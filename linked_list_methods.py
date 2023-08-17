@@ -128,13 +128,14 @@ class SinglyLinkedList:
     def reverse(self):
         current_node = self.head
         previous_node = None
-        self.tail = self.head
         self.head = self.tail
+        self.tail = current_node
         
         for _ in range(self.length):
-            previous_node = current_node
-            current_node = current_node.next
+            next_node = current_node.next
             current_node.next = previous_node
+            previous_node = current_node
+            current_node = next_node
             
         return self
     
