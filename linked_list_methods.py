@@ -139,6 +139,11 @@ class SinglyLinkedList:
             
         return self
     
+    
+    def make_lnkd_list_from_array(self, array):
+        for item in array:
+            self.push(item)
+    
         
     def print_list(self):
         current = self.head
@@ -154,19 +159,26 @@ class SinglyLinkedList:
     
             
 # *************************************************************
+strings_array = ["apple", "banana", "cherry", "date"]
+
 new_list = SinglyLinkedList()
 
-new_list.push('One')
-new_list.push('Two')
-new_list.push('Three')
-new_list.push('Four')
+new_list.make_lnkd_list_from_array(strings_array)
+
+# for string in strings_array:
+#     new_list.push(string)
+
+# new_list.push('One')
+# new_list.push('Two')
+# new_list.push('Three')
+# new_list.push('Four')
 
 print(new_list)
 new_list.print_list()
 
-new_list.reverse()
-print(new_list)
-new_list.print_list()
+# new_list.reverse()
+# print(new_list)
+# new_list.print_list()
 
 
 
