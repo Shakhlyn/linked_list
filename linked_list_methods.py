@@ -105,7 +105,38 @@ class SinglyLinkedList:
         return new_node
     
     
-
+    def remove(self, index):
+        if index < 0 or index >= self.length:
+            return 'Invalid index position!!!'
+        
+        elif index == 0:
+            tobe_removed_node = self.shift()
+        elif index == self.length -1:
+            tobe_removed_node = self.pop()
+        else:
+            previous_node = self.get(index-1)
+            tobe_removed_node = previous_node.next
+            next_node = tobe_removed_node.next
+            # next_node = previous_node.next.next
+            
+            
+            previous_node.next = next_node
+            self.length -= 1
+        return tobe_removed_node
+    
+    
+    def reverse(self):
+        current_node = self.head
+        previous_node = None
+        self.tail = self.head
+        self.head = self.tail
+        
+        for _ in range(self.length):
+            previous_node = current_node
+            current_node = current_node.next
+            current_node.next = previous_node
+            
+        return self
     
         
     def print_list(self):
@@ -130,10 +161,28 @@ new_list.push('Three')
 new_list.push('Four')
 
 print(new_list)
+new_list.print_list()
+
+new_list.reverse()
+print(new_list)
+new_list.print_list()
 
 
 
+# new_list.print_list()
+# print(new_list.remove(-1))
+# print(new_list)
+# new_list.print_list()
+# new_list.remove(0)
+# print(new_list)
+# new_list.print_list()
+# print(new_list.remove(2).value)
+# print(new_list)
+# new_list.print_list()
 
+# print(new_list.remove(3))
+# print(new_list)
+# new_list.print_list()
 
 
 
