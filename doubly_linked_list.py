@@ -70,8 +70,77 @@ class DoublyLinkedList:
             self.head.prev = None
             self.length -= 1
             
+            
+    def get(self, index):
+        if index < 0 or index >= self.length:
+            return 'Invalid index position!'
         
-    def __str__(self) -> str:
+        elif index <= self.length/2:
+            counter = 0
+            current = self.head
+            while counter != index:
+                current = current.next
+                counter += 1
+        else:
+            counter = self.length -1
+            current = self.tail
+            while counter != index:
+                current = current.prev
+                counter -=1
+        return current
+            
+            
+    def set(self, index, value):
+        if index < 0 or index >= self.length:
+            return "Invalid index position!"
+        else:
+            tobe_node = self.get(index)
+            tobe_node.value = value
+            return True
+        
+        
+    def insert(self, index, value):
+        if index < 0 or index >= self.length:
+            return "Invalid index position"
+        elif index == 0:
+            return self.prepend(value)
+        elif index == self.length:
+            return self.append(value)
+        else:
+            new_node = Node(value)
+            next_node = self.get(index)
+            previous_node = next_node.prev
+            previous_node.next = new_node
+            new_node.prev = previous_node
+            new_node.next = next_node
+            next_node.prev = new_node
+            self.length += 1
+
+  
+    def reverse(self):
+        current_node = self.head
+        self.head = self.tail
+        self.tail = current_node
+        
+        previous_node = None
+        
+        while current_node:
+            next_node = current_node.next
+            current_node.next = previous_node
+            current_node.prev = next_node
+            
+            previous_node = current_node
+            current_node = next_node
+                    
+        return self
+    
+    
+    def array_to_doubly_linked_list(self, array):
+        for item in array:
+            self.append(item)
+
+        
+    def __str__(self):
         if self.head is None:
             return f"Empty List: Undefined"
         return f"Head: {self.head.value}, Tail: {self.tail.value}, Length: {self.length}"
@@ -89,30 +158,52 @@ class DoublyLinkedList:
 
 doubly_linked_list = DoublyLinkedList()
 
-doubly_linked_list.append('old')
-doubly_linked_list.append('new_value')
-doubly_linked_list.append('extra')
-doubly_linked_list.append('ultra')
+# doubly_linked_list.append('old')
+# doubly_linked_list.append('new_value')
+# doubly_linked_list.append('extra')
+# doubly_linked_list.append('ultra')
+
+doubly_linked_list.array_to_doubly_linked_list(['hi', 6, 23.44, 'new string', 'last'])
 
 print(doubly_linked_list)
 doubly_linked_list.print_list()
 
+doubly_linked_list.reverse()
+print(doubly_linked_list)
+doubly_linked_list.print_list()
 
-doubly_linked_list.shift()
-print(doubly_linked_list)
-doubly_linked_list.print_list()
-doubly_linked_list.shift()
-print(doubly_linked_list)
-doubly_linked_list.print_list()
-doubly_linked_list.shift()
-print(doubly_linked_list)
-doubly_linked_list.print_list()
-doubly_linked_list.shift()
-print(doubly_linked_list)
-doubly_linked_list.print_list()
-doubly_linked_list.shift()
-print(doubly_linked_list)
-doubly_linked_list.print_list()
+# doubly_linked_list.insert(0, "first")
+# doubly_linked_list.insert(23, "exceeds")
+# doubly_linked_list.insert(2, "third")
+# print(doubly_linked_list)
+# doubly_linked_list.print_list()
+
+# print(doubly_linked_list.set(-1, 'first node'))
+# print(doubly_linked_list.set(0, 'first node'))
+# # print(doubly_linked_list.set(2, 'two'))
+# print(doubly_linked_list)
+# doubly_linked_list.print_list()
+
+# print(doubly_linked_list.get(0).value)
+# print(doubly_linked_list.get(1).value)
+# print(doubly_linked_list.get(3).value)
+# print(doubly_linked_list.get(2).value)
+
+# doubly_linked_list.shift()
+# print(doubly_linked_list)
+# doubly_linked_list.print_list()
+# doubly_linked_list.shift()
+# print(doubly_linked_list)
+# doubly_linked_list.print_list()
+# doubly_linked_list.shift()
+# print(doubly_linked_list)
+# doubly_linked_list.print_list()
+# doubly_linked_list.shift()
+# print(doubly_linked_list)
+# doubly_linked_list.print_list()
+# doubly_linked_list.shift()
+# print(doubly_linked_list)
+# doubly_linked_list.print_list()
 
 # doubly_linked_list.pop()
 # print(doubly_linked_list)
